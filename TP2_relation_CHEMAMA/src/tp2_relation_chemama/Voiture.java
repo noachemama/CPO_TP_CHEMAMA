@@ -13,10 +13,13 @@ public class Voiture {
 String modele;
 String marque;
 int nb;
+Personne Proprietaire;
+
     public Voiture(String modele, String marque, int nb) {
         this.modele = modele;
         this.marque = marque;
-        this.nb = nb;    
+        this.nb = nb; 
+        this.Proprietaire = null;
 }
      @Override
     public String toString() {
