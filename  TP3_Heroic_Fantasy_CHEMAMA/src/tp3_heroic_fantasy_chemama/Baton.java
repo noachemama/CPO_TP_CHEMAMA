@@ -8,6 +8,12 @@ package tp3_heroic_fantasy_chemama;
  *
  * @author Noa Chemama
  */
-public class Baton {
-    
+public class Baton extends Arme{
+    double age;
+
+    public Baton(double age, int niveau_at, String nom) {
+        super(niveau_at, nom);
+        this.age = age;
+    }
+
 }
