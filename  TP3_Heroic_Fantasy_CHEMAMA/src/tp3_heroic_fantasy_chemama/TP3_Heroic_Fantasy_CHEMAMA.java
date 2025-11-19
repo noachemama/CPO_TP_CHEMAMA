@@ -4,6 +4,8 @@
  */
 package tp3_heroic_fantasy_chemama;
 
+import Armes.Epee;
+import Armes.Baton;
 import java.util.ArrayList;
 
 /**
@@ -27,8 +29,11 @@ public class TP3_Heroic_Fantasy_CHEMAMA {
             Tab.add("Durandal");
              Tab.add("Chene");     
             Tab.add("Charme");
-       
-       System.out.println("arme"+Excalibur);
-    }
+            
+            for (int i = 0; i < Tab.size(); i++) {
+    String arme = Tab.get(i);   // récupération avec elementAt()
+    System.out.println("Arme " + i + " : " + arme);
+            }
     
-}
+    
+}}

@@ -1,4 +1,6 @@
-package tp3_heroic_fantasy_chemama;
+package Armes;
+
+import Armes.Arme;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
