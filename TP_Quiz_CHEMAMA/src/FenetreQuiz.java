@@ -18,6 +18,7 @@ public class FenetreQuiz extends javax.swing.JFrame {
    
    
    private int indexQuestionCourante = 0;
+   int nbJuste=0;
     
     public FenetreQuiz() {
         initComponents();
@@ -27,6 +28,20 @@ public class FenetreQuiz extends javax.swing.JFrame {
          listeQuestions.add(new Question("Quel est l'océan le plus grand ?","Atlantique", "Indien", "Arctique", "Pacifique",4));
          
        lblQuestion.setText(listeQuestions.get(0).getIntitule());
+       btnRep1.setText(listeQuestions.get(0).getProposition1());  
+        btnRep2.setText(listeQuestions.get(0).getProposition2());
+         btnRep3.setText(listeQuestions.get(0).getProposition3());
+          btnRep4.setText(listeQuestions.get(0).getProposition4());
+         questionSuiv.setText("Commencer la partie");
+         bonneRep.setText("BONNE REPONSE !!!!!");
+         mauvaiseRep.setText("MAUVAISE REPONSE !!!!!!");
+         bonneRep.setVisible(false);
+         mauvaiseRep.setVisible(false);
+         btnRep1.setVisible(false);
+         btnRep2.setVisible(false);
+         btnRep3.setVisible(false);
+         btnRep4.setVisible(false);
+         lblQuestion.setVisible(false);
          
     }
 
@@ -47,12 +62,13 @@ public class FenetreQuiz extends javax.swing.JFrame {
         bonneRep = new javax.swing.JLabel();
         mauvaiseRep = new javax.swing.JLabel();
         questionSuiv = new javax.swing.JButton();
+        score = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblQuestion.setText("jLabel1");
-        getContentPane().add(lblQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 140, 120));
+        getContentPane().add(lblQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 240, 120));
 
         btnRep1.setText("jButton1");
         btnRep1.addActionListener(new java.awt.event.ActionListener() {
@@ -98,29 +114,72 @@ public class FenetreQuiz extends javax.swing.JFrame {
                 questionSuivActionPerformed(evt);
             }
         });
-        getContentPane().add(questionSuiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+        getContentPane().add(questionSuiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, 30));
+
+        score.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        score.setText("jLabel1");
+        getContentPane().add(score, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 200, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep1ActionPerformed
-        // TODO add your handling code here:
+        if (1 == listeQuestions.get(0).getIndexBonneReponse()) {
+        bonneRep.setVisible(true); 
+        nbJuste++;
+    }else {
+            mauvaiseRep.setVisible(true);
+        }
     }//GEN-LAST:event_btnRep1ActionPerformed
 
     private void btnRep2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep2ActionPerformed
-        // TODO add your handling code here:
+       if (2 == listeQuestions.get(0).getIndexBonneReponse()) {
+        bonneRep.setVisible(true);
+        nbJuste++;
+    }else {
+            mauvaiseRep.setVisible(true);
+        }
     }//GEN-LAST:event_btnRep2ActionPerformed
 
     private void btnRep3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep3ActionPerformed
-        // TODO add your handling code here:
+        if (3 == listeQuestions.get(0).getIndexBonneReponse()) {
+        bonneRep.setVisible(true);   
+        nbJuste++;
+    }else {
+            mauvaiseRep.setVisible(true);
+        }
     }//GEN-LAST:event_btnRep3ActionPerformed
 
     private void btnRep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep4ActionPerformed
-        // TODO add your handling code here:
+        if (4 == listeQuestions.get(0).getIndexBonneReponse()) {
+        bonneRep.setVisible(true); 
+        nbJuste++;
+    }else {
+            mauvaiseRep.setVisible(true);
+        }
     }//GEN-LAST:event_btnRep4ActionPerformed
 
     private void questionSuivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionSuivActionPerformed
-        // TODO add your handling code here:
+       questionSuiv.setText("Question Suivante");
+        btnRep1.setVisible(true);
+         btnRep2.setVisible(true);
+         btnRep3.setVisible(true);
+         btnRep4.setVisible(true);
+         lblQuestion.setVisible(true);
+        bonneRep.setVisible(false);
+        mauvaiseRep.setVisible(false);
+        int compteur=0;
+         lblQuestion.setText(listeQuestions.get(indexQuestionCourante).getIntitule());
+       btnRep1.setText(listeQuestions.get(indexQuestionCourante).getProposition1());  
+        btnRep2.setText(listeQuestions.get(indexQuestionCourante).getProposition2());
+         btnRep3.setText(listeQuestions.get(indexQuestionCourante).getProposition3());
+          btnRep4.setText(listeQuestions.get(indexQuestionCourante).getProposition4());
+          indexQuestionCourante++;
+          compteur++;
+          if (compteur==4){
+              score.setVisible(true);
+              score.setText("score :" + compteur +"/" + indexQuestionCourante );
+          }
     }//GEN-LAST:event_questionSuivActionPerformed
 
     /**
@@ -157,5 +216,6 @@ public class FenetreQuiz extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuestion;
     private javax.swing.JLabel mauvaiseRep;
     private javax.swing.JButton questionSuiv;
+    private javax.swing.JLabel score;
     // End of variables declaration//GEN-END:variables
 }
