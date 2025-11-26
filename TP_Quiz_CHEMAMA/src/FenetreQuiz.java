@@ -19,7 +19,7 @@ public class FenetreQuiz extends javax.swing.JFrame {
    
    private int indexQuestionCourante = 0;
    int nbJuste=0;
-    
+   int compteur=0; 
     public FenetreQuiz() {
         initComponents();
         listeQuestions = new ArrayList<>();
@@ -42,6 +42,7 @@ public class FenetreQuiz extends javax.swing.JFrame {
          btnRep3.setVisible(false);
          btnRep4.setVisible(false);
          lblQuestion.setVisible(false);
+         score.setVisible(false);
          
     }
 
@@ -124,43 +125,62 @@ public class FenetreQuiz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep1ActionPerformed
-        if (1 == listeQuestions.get(0).getIndexBonneReponse()) {
+        if (1 == listeQuestions.get(indexQuestionCourante).getIndexBonneReponse()) {
         bonneRep.setVisible(true); 
         nbJuste++;
     }else {
             mauvaiseRep.setVisible(true);
         }
+        indexQuestionCourante++;
     }//GEN-LAST:event_btnRep1ActionPerformed
 
     private void btnRep2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep2ActionPerformed
-       if (2 == listeQuestions.get(0).getIndexBonneReponse()) {
+       if (2 == listeQuestions.get(indexQuestionCourante).getIndexBonneReponse()) {
         bonneRep.setVisible(true);
         nbJuste++;
     }else {
             mauvaiseRep.setVisible(true);
         }
+       indexQuestionCourante++;
     }//GEN-LAST:event_btnRep2ActionPerformed
 
     private void btnRep3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep3ActionPerformed
-        if (3 == listeQuestions.get(0).getIndexBonneReponse()) {
+        if (3 == listeQuestions.get(indexQuestionCourante).getIndexBonneReponse()) {
         bonneRep.setVisible(true);   
         nbJuste++;
     }else {
             mauvaiseRep.setVisible(true);
         }
+        indexQuestionCourante++;
     }//GEN-LAST:event_btnRep3ActionPerformed
 
     private void btnRep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRep4ActionPerformed
-        if (4 == listeQuestions.get(0).getIndexBonneReponse()) {
+        if (4 == listeQuestions.get(indexQuestionCourante).getIndexBonneReponse()) {
         bonneRep.setVisible(true); 
         nbJuste++;
     }else {
             mauvaiseRep.setVisible(true);
         }
+        indexQuestionCourante++;
     }//GEN-LAST:event_btnRep4ActionPerformed
 
     private void questionSuivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionSuivActionPerformed
-       questionSuiv.setText("Question Suivante");
+       compteur++;
+          if (compteur==4){
+              compteur=compteur-1;
+            score.setVisible(true);
+            bonneRep.setVisible(false);
+            mauvaiseRep.setVisible(false);
+            btnRep1.setVisible(false);
+            btnRep2.setVisible(false);
+            btnRep3.setVisible(false);
+            btnRep4.setVisible(false);
+            lblQuestion.setVisible(false);
+            score.setText("score :" + nbJuste  +"/" + indexQuestionCourante );
+          
+          }else{
+          
+        questionSuiv.setText("Question Suivante");
         btnRep1.setVisible(true);
          btnRep2.setVisible(true);
          btnRep3.setVisible(true);
@@ -168,17 +188,12 @@ public class FenetreQuiz extends javax.swing.JFrame {
          lblQuestion.setVisible(true);
         bonneRep.setVisible(false);
         mauvaiseRep.setVisible(false);
-        int compteur=0;
          lblQuestion.setText(listeQuestions.get(indexQuestionCourante).getIntitule());
        btnRep1.setText(listeQuestions.get(indexQuestionCourante).getProposition1());  
         btnRep2.setText(listeQuestions.get(indexQuestionCourante).getProposition2());
          btnRep3.setText(listeQuestions.get(indexQuestionCourante).getProposition3());
           btnRep4.setText(listeQuestions.get(indexQuestionCourante).getProposition4());
-          indexQuestionCourante++;
-          compteur++;
-          if (compteur==4){
-              score.setVisible(true);
-              score.setText("score :" + compteur +"/" + indexQuestionCourante );
+          
           }
     }//GEN-LAST:event_questionSuivActionPerformed
 
