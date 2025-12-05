@@ -17,14 +17,13 @@ public class Cadenas extends javax.swing.JFrame {
 
     public Cadenas() {
         initComponents();
-        int[] chiffres = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] chiffres = {0,1, 2, 3, 4, 5, 6, 7, 8, 9};
         
         texte_fin.setVisible(false);
-        texte_chiffre_0.setText("0");
-        texte_chiffre_1.setText("0");
-        texte_chiffre_2.setText("0");
-        texte_chiffre_3.setText("0");
-        
+        texte_chiffre_0.setText(String.valueOf(chiffres[0]));
+        texte_chiffre_1.setText(String.valueOf(chiffres[0]));
+        texte_chiffre_2.setText(String.valueOf(chiffres[0]));
+        texte_chiffre_3.setText(String.valueOf(chiffres[0]));
         int number = (int)(Math.random() * 10000); 
         String resultat = String.format("%04d", number);
     }
@@ -71,6 +70,11 @@ public class Cadenas extends javax.swing.JFrame {
 
         up_chiffre_1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         up_chiffre_1.setText("/\\");
+            up_chiffre_1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    up_chiffre_1ActionPerformed(evt);
+                }
+            });
             getContentPane().add(up_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 30));
 
             up_chiffre_2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -181,6 +185,12 @@ public class Cadenas extends javax.swing.JFrame {
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bouton_recommencerActionPerformed
+
+    private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
+
+  
+        texte_chiffre_0.setText(String.valueOf(chiffres[0]));
+    }//GEN-LAST:event_up_chiffre_1ActionPerformed
 
     /**
      * @param args the command line arguments
