@@ -18,11 +18,15 @@ public class Cadenas extends javax.swing.JFrame {
     public Cadenas() {
         initComponents();
         int[] chiffres = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        
         texte_fin.setVisible(false);
         texte_chiffre_0.setText("0");
         texte_chiffre_1.setText("0");
         texte_chiffre_2.setText("0");
         texte_chiffre_3.setText("0");
+        
+        int number = (int)(Math.random() * 10000); 
+        String resultat = String.format("%04d", number);
     }
 
     /**
