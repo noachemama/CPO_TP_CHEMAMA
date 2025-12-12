@@ -21,9 +21,16 @@ public class Cadenas extends javax.swing.JFrame {
     int compteur4=0;
     int resultatUtilisateur=0;
     int nombreTentative=0;
-    int number = (int)(Math.random() * 10000); 
-    String resultat = String.format("%04d", number);
-    int valeur = Integer.parseInt(resultat);
+  int number = (int)(Math.random() * 10000);
+String resultat = String.format("%04d", number);
+int valeur = Integer.parseInt(resultat);
+int[] chif = new int[4];
+int[] Ut = new int[4];
+int b =0;
+int c=0;
+int d=0;
+int a=0;
+
     public Cadenas() {
         initComponents();
         
@@ -32,7 +39,11 @@ public class Cadenas extends javax.swing.JFrame {
         texte_chiffre_1.setText(String.valueOf(chiffres[0]));
         texte_chiffre_2.setText(String.valueOf(chiffres[0]));
         texte_chiffre_3.setText(String.valueOf(chiffres[0]));
-        int a=0;
+        texte_nb_chiffres_haut.setText(String.valueOf(b));
+        texte_nb_chiffre_bas.setText(String.valueOf(c));
+        texte_nb_chiffres_exacts.setText(String.valueOf(d));
+        texte_tentatives.setText(String.valueOf(a));
+        
     }
 
     /**
@@ -82,7 +93,7 @@ public class Cadenas extends javax.swing.JFrame {
                     up_chiffre_1ActionPerformed(evt);
                 }
             });
-            getContentPane().add(up_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 30));
+            getContentPane().add(up_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
             up_chiffre_2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
             up_chiffre_2.setText("/\\");
@@ -112,20 +123,24 @@ public class Cadenas extends javax.swing.JFrame {
                         getContentPane().add(up_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
 
                         texte_chiffre_0.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+                        texte_chiffre_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_chiffre_0.setText("jLabel1");
-                        getContentPane().add(texte_chiffre_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 40, 60));
+                        getContentPane().add(texte_chiffre_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 40, 60));
 
                         texte_chiffre_1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+                        texte_chiffre_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_chiffre_1.setText("jLabel2");
-                        getContentPane().add(texte_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 40, -1));
+                        getContentPane().add(texte_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 40, -1));
 
                         texte_chiffre_2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+                        texte_chiffre_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_chiffre_2.setText("jLabel3");
-                        getContentPane().add(texte_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 40, -1));
+                        getContentPane().add(texte_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 40, -1));
 
                         texte_chiffre_3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+                        texte_chiffre_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_chiffre_3.setText("jLabel4");
-                        getContentPane().add(texte_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 40, -1));
+                        getContentPane().add(texte_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 40, -1));
 
                         down_chiffre_1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                         down_chiffre_1.setText("\\/");
@@ -143,7 +158,7 @@ public class Cadenas extends javax.swing.JFrame {
                                 down_chiffre_2ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(down_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, -1));
+                        getContentPane().add(down_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
 
                         down_chiffre_3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                         down_chiffre_3.setText("\\/");
@@ -152,7 +167,7 @@ public class Cadenas extends javax.swing.JFrame {
                                 down_chiffre_3ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(down_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
+                        getContentPane().add(down_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
 
                         down_chiffre_4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                         down_chiffre_4.setText("\\/");
@@ -161,7 +176,7 @@ public class Cadenas extends javax.swing.JFrame {
                                 down_chiffre_4ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(down_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
+                        getContentPane().add(down_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, -1, -1));
 
                         bouton_tester.setText("Tester");
                         bouton_tester.addActionListener(new java.awt.event.ActionListener() {
@@ -175,27 +190,28 @@ public class Cadenas extends javax.swing.JFrame {
                         getContentPane().add(texte_lbl_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
                         texte_nb_chiffres_exacts.setText("jLabel2");
-                        getContentPane().add(texte_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
+                        getContentPane().add(texte_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, -1, -1));
 
                         texte_lbl_nb_chiffres_haut.setText("Nombre de chiffres trop hauts :");
                         getContentPane().add(texte_lbl_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
                         texte_nb_chiffres_haut.setText("jLabel4");
-                        getContentPane().add(texte_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+                        getContentPane().add(texte_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, -1));
 
                         texte_lbl_nb_chiffres_bas.setText("Nombres de chiffres trop bas :");
                         getContentPane().add(texte_lbl_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
                         texte_nb_chiffre_bas.setText("jLabel6");
-                        getContentPane().add(texte_nb_chiffre_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, -1, -1));
+                        getContentPane().add(texte_nb_chiffre_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
 
                         texte_score.setText("Tentatives");
                         getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
 
                         texte_tentatives.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+                        texte_tentatives.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_tentatives.setText("jLabel2");
                         texte_tentatives.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-                        getContentPane().add(texte_tentatives, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, -1));
+                        getContentPane().add(texte_tentatives, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 50, -1));
 
                         bouton_recommencer.setText("Recommencer");
                         bouton_recommencer.addActionListener(new java.awt.event.ActionListener() {
@@ -205,8 +221,9 @@ public class Cadenas extends javax.swing.JFrame {
                         });
                         getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 110, 20));
 
+                        texte_fin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
                         texte_fin.setText("jLabel1");
-                        getContentPane().add(texte_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+                        getContentPane().add(texte_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 320, 30));
 
                         pack();
                     }// </editor-fold>//GEN-END:initComponents
@@ -224,7 +241,9 @@ compteur3=compteur3+1;
     }//GEN-LAST:event_up_chiffre_3ActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
-        // TODO add your handling code here:
+ Cadenas i =new Cadenas();
+    i.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
@@ -264,14 +283,87 @@ compteur4=compteur4-1;
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
 
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
+b =0;
+c=0;
+d=0;
+              
 resultatUtilisateur=compteur1*1000+compteur2*100+compteur3*10+compteur4;
+a++;
+texte_tentatives.setText(String.valueOf(a));
+
+chif[0] = (valeur / 1000) % 10;
+chif[1] = (valeur / 100) % 10;
+chif[2] = (valeur / 10) % 10;
+chif[3] = valeur % 10;
+
+Ut[0] = compteur1;
+Ut[1] = compteur2;
+Ut[2] = compteur3;
+Ut[3] = compteur4;
+for (int i = 0; i < 4; i++) {
+    if (chif[i] < Ut[i]) {
+        b=b+1;
+        texte_nb_chiffres_haut.setText(String.valueOf(b));
+    } else if (chif[i] > Ut[i]) {
+        c=c+1;
+        texte_nb_chiffre_bas.setText(String.valueOf(c));
+    } else {
+        d=d+1;
+        texte_nb_chiffres_exacts.setText(String.valueOf(d));
+    }
+}        
+        resultatUtilisateur=compteur1*1000+compteur2*100+compteur3*10+compteur4;
 if (resultatUtilisateur==valeur){
-    texte_fin.setText("VOUS AVEZ GAGNEEEEEEE !!!!!");
-    texte_fin.setVisible(true);
+    
+   texte_fin.setText("VOUS AVEZ GAGNEEEEE !!!");
+   texte_fin.setVisible(true);
+   texte_chiffre_0.setVisible(false);
+   texte_chiffre_1.setVisible(false);
+   texte_chiffre_2.setVisible(false);
+   texte_chiffre_3.setVisible(false);
+   texte_intro.setVisible(false);
+   up_chiffre_1.setVisible(false);
+   up_chiffre_2.setVisible(false);
+   up_chiffre_3.setVisible(false);
+   up_chiffre_4.setVisible(false);
+   down_chiffre_1.setVisible(false);
+   down_chiffre_2.setVisible(false);
+   down_chiffre_3.setVisible(false);
+   down_chiffre_4.setVisible(false);
+   texte_lbl_nb_chiffres_exacts.setVisible(false);
+   texte_lbl_nb_chiffres_haut.setVisible(false);
+   texte_lbl_nb_chiffres_bas.setVisible(false);
+   texte_nb_chiffres_exacts.setVisible(false);
+   texte_nb_chiffres_haut.setVisible(false);
+   texte_nb_chiffre_bas.setVisible(false);
+   
 }else {
     nombreTentative++;
 }
-if (nombreTentative
+if (nombreTentative==5){
+    texte_fin.setText("VOUS AVEZ PERDUUUUU !!!");
+   texte_fin.setVisible(true);
+   texte_chiffre_0.setVisible(false);
+   texte_chiffre_1.setVisible(false);
+   texte_chiffre_2.setVisible(false);
+   texte_chiffre_3.setVisible(false);
+   texte_intro.setVisible(false);
+   up_chiffre_1.setVisible(false);
+   up_chiffre_2.setVisible(false);
+   up_chiffre_3.setVisible(false);
+   up_chiffre_4.setVisible(false);
+   down_chiffre_1.setVisible(false);
+   down_chiffre_2.setVisible(false);
+   down_chiffre_3.setVisible(false);
+   down_chiffre_4.setVisible(false);
+   texte_lbl_nb_chiffres_exacts.setVisible(false);
+   texte_lbl_nb_chiffres_haut.setVisible(false);
+   texte_lbl_nb_chiffres_bas.setVisible(false);
+   texte_nb_chiffres_exacts.setVisible(false);
+   texte_nb_chiffres_haut.setVisible(false);
+   texte_nb_chiffre_bas.setVisible(false);
+ 
+}
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     /**
