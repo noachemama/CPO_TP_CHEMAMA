@@ -1,37 +1,108 @@
 package la_chevauchée_fantastique_chemama;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class chevauchée_fantastique extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(chevauchée_fantastique.class.getName());
+
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(chevauchée_fantastique.class.getName());
 
     private jeu jeu;
-    private JButton[][] boutons; 
-    
-    public chevauchée_fantastique() {
-initComponents();
+    private JButton[][] boutons;
+    private int nbLignes = 5;
+    private int nbColonnes = 5;
 
-int nbLignes = 10;
-int nbColonnes = 10;
-jeu = new jeu(nbLignes, nbColonnes, 0, 0);
-PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));    
-    
-for (int i=0; i < nbLignes; i++) {
-for (int j=0; j < nbColonnes; j++ ) {
-JButton bouton_cellule = new JButton(); // création d'un bouton
-PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
-}
-}}
+    public chevauchée_fantastique() {
+        initComponents();
+
+        // Création du jeu
+        jeu = new jeu(nbLignes, nbColonnes, 2, 2);
+
+        // Initialisation des boutons
+        boutons = new JButton[nbLignes][nbColonnes];
+        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                JButton bouton_cellule = new JButton();
+                final int ligne = i;
+                final int col = j;
+
+                // Couleur initiale : certaines éteintes (gris), certaines allumées (jaune)
+                if (Math.random() < 0.8) { // 40% de chance d'être éteinte
+                    jeu.board.getCase(i, j).eteindre();
+                    bouton_cellule.setBackground(Color.GRAY);
+                } else {
+                    jeu.board.getCase(i, j).allumer();
+                    bouton_cellule.setBackground(Color.YELLOW);
+                }
+
+                // Action quand on clique sur un bouton
+                bouton_cellule.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Case c = jeu.board.getCase(ligne, col);
+
+                        // Si case rouge (déjà visitée), on ne peut pas y aller
+                        if (c.estRouge()) {
+                            JOptionPane.showMessageDialog(null, "Le cavalier ne peut pas revenir ici !");
+                            return;
+                        }
+
+                        // Essaye de jouer
+                        boolean deplacementOk = jeu.jouer(ligne, col);
+                        if (!deplacementOk) {
+                            JOptionPane.showMessageDialog(null, "Déplacement invalide !");
+                            return;
+                        }
+
+                        // Marquer la case précédente comme rouge
+                        int prevLigne = jeu.knight.getLigne();
+                        int prevCol = jeu.knight.getCol();
+                        // La case précédente est déjà éteinte donc safe
+                        c.setRouge();
+
+                        // Mettre à jour les boutons
+                        updateButtons();
+
+                        // Vérifie si toutes les cases sont éteintes
+                        if (jeu.board.toutesEteintes()) {
+                            JOptionPane.showMessageDialog(null, "Félicitations ! Vous avez gagné !");
+                        }
+                    }
+                });
+
+                boutons[i][j] = bouton_cellule;
+                PanneauGrille.add(bouton_cellule);
+            }
+        }
+
+        // Mettre à jour le bouton du cavalier au départ
+        updateButtons();
+    }
+
+    // Met à jour les couleurs des boutons
+    private void updateButtons() {
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                Case c = jeu.board.getCase(i, j);
+                if (i == jeu.knight.getLigne() && j == jeu.knight.getCol()) {
+                    boutons[i][j].setBackground(Color.BLUE); // Cavalier
+                } else if (c.estRouge()) {
+                    boutons[i][j].setBackground(Color.RED); // Déjà passé
+                } else if (c.estAllumee()) {
+                    boutons[i][j].setBackground(Color.YELLOW); // Allumée
+                } else {
+                    boutons[i][j].setBackground(Color.GRAY); // Éteinte
+                }
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,9 +112,14 @@ PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         PanneauGrille = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(808, 800));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanneauGrille.setBackground(new java.awt.Color(0, 153, 153));
@@ -52,14 +128,17 @@ PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
         PanneauGrille.setLayout(PanneauGrilleLayout);
         PanneauGrilleLayout.setHorizontalGroup(
             PanneauGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
         PanneauGrilleLayout.setVerticalGroup(
             PanneauGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 400, 400));
+        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 640, 400));
+
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -91,5 +170,7 @@ PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanneauGrille;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
