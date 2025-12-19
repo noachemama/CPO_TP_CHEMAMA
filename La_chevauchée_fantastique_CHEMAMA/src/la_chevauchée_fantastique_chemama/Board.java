@@ -30,4 +30,22 @@ public class Board {
     Case getCase(int ligne, int col) {
         return cases[ligne][col];
     }
+  boolean toutesEteintes() {
+
+    for (int i = 0; i < nbLignes; i++) {
+        for (int j = 0; j < nbColonnes; j++) {
+
+            if (cases[i][j].estAllumee()) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}  
+    
+    
+    
+    
 }
+

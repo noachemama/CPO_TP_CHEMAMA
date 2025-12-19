@@ -14,6 +14,7 @@ public class Case {
     private int col;
     private int ligne;
     private boolean onOff;
+    private boolean visitee;
 
     public Case(int col, int ligne, boolean onOff) {
         this.col = col;
@@ -43,5 +44,12 @@ public class Case {
 
     int getCol() {
         return col;
+    }
+    void setRouge() {
+        visitee = true;
+    }
+
+    boolean estRouge() {
+        return visitee;
     }
 }
